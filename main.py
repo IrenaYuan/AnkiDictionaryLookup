@@ -76,30 +76,24 @@ def lookUp(word):
                     try:
                         if isinstance(child['class'].index('def-block'), int):
                             #例句
-                            example = child.select('.examp .eg')
+                            example = child.select('.examp')
                             if len(example) != 0:
-                                file.write("<ol>")
+                                file.write("<div class='def-block'>")
+                                file.write("<div class='trans'>" + child.select('.def-body .trans')[0].get_text("", strip=True) + "</div>")
                                 for i in example:
-                                    print('example={}'.format(i.get_text()))
-                                    file.write("<li>" + i.get_text() + "</li>")
-                                file.write('</ol><hr/>')
-                    except (ValueError,TypeError) as e:
-                        pass
-            file.write(';')
-
-            for sense_body in sense_bodys:
-                for index, child in enumerate(sense_body.children):
-                    try:
-                        if isinstance(child['class'].index('def-block'), int):
-                            #例句中文
-                            exampleZh = child.select('.examp .trans')
-                            if len(exampleZh) != 0:
-                                file.write("<ol>")
-                                for i in exampleZh:
-                                    i = i.get_text("", strip=True)
-                                    print('exampleZh={}'.format(i))
-                                    file.write("<li>" + i + "</li>")
-                                file.write('</ol><hr/>')
+                                    examp_eg = ''
+                                    examp_trans = ''
+                                    if len(i.select('.eg')) != 0:
+                                        examp_eg = i.select('.eg')[0].get_text()
+                                    if len(i.select('.trans')) != 0 :
+                                        examp_trans = i.select('.trans')[0].get_text("", strip=True)
+                                    print('example={}'.format(examp_eg))
+                                    print('example_trans={}'.format(examp_trans))
+                                    file.write("<div class='examp'>")
+                                    file.write("<span>" + examp_eg + "</span>")
+                                    file.write("<span>" + examp_trans + "</span>")
+                                    file.write("</div>")
+                                file.write("</div>")
                     except (ValueError,TypeError) as e:
                         pass
             file.write(';')
@@ -116,7 +110,7 @@ def lookUp(word):
             phrase_blocks = entry.find_all('div', class_='phrase-block')
             for phrase_block in phrase_blocks:
                 phrase_title = phrase_block.select('.phrase-head .phrase-title .phrase')
-                phrase_title = phrase_title[0].get_text("", strip=True)
+                phrase_title = phrase_title[0].get_text()
                 print('phrase_title={}'.format(phrase_title))
                 file.write(phrase_title + ';;;')
 
@@ -125,23 +119,24 @@ def lookUp(word):
                 print('phrase_trans={}'.format(phrase_trans))
                 file.write(phrase_trans + ';')
 
-                phrase_example = phrase_block.select('.phrase-body .def-block .def-body .examp .eg')
+                phrase_example = phrase_block.select('.phrase-body .def-block .def-body .examp')
                 if len(phrase_example) != 0:
-                    file.write("<ol>")
+                    file.write("<div class='def-block'>")
                     for i in phrase_example:
-                        print('phrase_example={}'.format(i.get_text()))
-                        file.write("<li>" + i.get_text() + "</li>")
-                    file.write('</ol>;')
-
-                phrase_exampleZh = phrase_block.select('.phrase-body .def-block .def-body .examp .trans')
-                if len(phrase_exampleZh) != 0:
-                    file.write("<ol>")
-                    for i in phrase_exampleZh:
-                        i = i.get_text("", strip=True)
-                        print('phrase_exampleZh={}'.format(i))
-                        file.write("<li>" + i + "</li>")
-                    file.write('</ol>;')
-                file.write('[sound:' + headword + '.mp3]\n')
+                        examp_eg = ''
+                        examp_trans = ''
+                        if len(i.select('.eg')) != 0:
+                            examp_eg = i.select('.eg')[0].get_text()
+                        if len(i.select('.trans')) != 0 :
+                            examp_trans = i.select('.trans')[0].get_text("", strip=True)
+                        print('phrase_example={}'.format(examp_eg))
+                        print('phrase_exampleZh={}'.format(examp_trans))
+                        file.write("<div class='examp'>")
+                        file.write("<span>" + examp_eg + "</span>")
+                        file.write("<span>" + examp_trans + "</span>")
+                        file.write("</div>")
+                    file.write('</div>')
+                file.write(';[sound:' + headword + '.mp3]\n')
 
 
 
