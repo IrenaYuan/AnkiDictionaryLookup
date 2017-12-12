@@ -36,37 +36,39 @@ look up words in Cambridge Dictionary via web Crawler.
 ## 卡片顯示與樣式設定
 
 ### 樣式
-	.card {
-	 font-family: arial;
-	 font-size: 20px;
-	 color: black;
-	 background-color: white;
-	 text-align: left;
-	}
-	ol {
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-	span {
-		display: block;
-		line-height: 1.2;
-	}
-	.examp {
-		margin-bottom: 15px;
-	}
-	.examp > span:last-child {
-		font-size: 18px;
-		font-weight: bold;
-		color: #0096ab;
-	}
-	.trans {
-		color: #666;
-		font-size: 20px;
-		font-weight: 600;
-		margin-top: 20px;
-		margin-bottom: 20px;
-	}
 
+```css
+.card {
+ font-family: arial;
+ font-size: 20px;
+ color: black;
+ background-color: white;
+ text-align: left;
+}
+ol {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+span {
+	display: block;
+	line-height: 1.2;
+}
+.examp {
+	margin-bottom: 15px;
+}
+.examp > span:last-child {
+	font-size: 18px;
+	font-weight: bold;
+	color: #0096ab;
+}
+.trans {
+	color: #666;
+	font-size: 20px;
+	font-weight: 600;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+```
 
 ## 卡片
 
@@ -75,21 +77,22 @@ look up words in Cambridge Dictionary via web Crawler.
 
 ## 在例句中的html格式
 
-	<div class='def-block'>
-		<div class='trans'><!-- 意思 --></div>
-		<!-- 該意思中的例句第一個span為英文，第二個span為該例句中文 -->
-		<div class='examp'>
-			<span></span>
-			<span></span>
-		</div>
+```html
+<div class='def-block'>
+	<div class='trans'><!-- 意思 --></div>
+	<!-- 該意思中的例句第一個span為英文，第二個span為該例句中文 -->
+	<div class='examp'>
+		<span></span>
+		<span></span>
 	</div>
-	<div class='def-block'>
-		<div class='trans'><!-- 意思 --></div>
-		<!-- 該意思中的例句第一個span為英文，第二個span為該例句中文 -->
-		<div class='examp'>
-			<span></span>
-			<span></span>
-		</div>
+</div>
+<div class='def-block'>
+	<div class='trans'><!-- 意思 --></div>
+	<!-- 該意思中的例句第一個span為英文，第二個span為該例句中文 -->
+	<div class='examp'>
+		<span></span>
+		<span></span>
 	</div>
-	<!-- ...該單字有幾個意思就會有多個div with class 'def-block' -->
-
+</div>
+<!-- ...該單字有幾個意思就會有多個div with class 'def-block' -->
+```
